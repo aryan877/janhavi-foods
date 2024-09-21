@@ -1,34 +1,43 @@
 "use client";
 
-import React from "react";
-import {
-  Accordion,
-  AccordionItem,
-  AccordionTrigger,
-  AccordionContent,
-} from "@/components/ui/accordion";
+import React, { useState } from "react";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import {
+  Utensils,
+  ArrowDownCircle,
+  ArrowUpCircle,
+  Info,
+  Sun,
+  Search,
+} from "lucide-react";
 
-const HormoneCard = ({ title, foods }: { title: string; foods: string[] }) => (
+const HormoneCard = ({
+  number,
+  title,
+  foods,
+  description,
+}: {
+  number: number;
+  title: string;
+  foods: string[];
+  description: string;
+}) => (
   <Card className="mb-4">
     <CardHeader>
       <CardTitle className="text-lg font-semibold text-blue-700">
-        {title}
+        {number}. {title}
       </CardTitle>
     </CardHeader>
     <CardContent>
-      <div className="flex flex-wrap gap-2">
+      <p className="mb-2 text-gray-600">{description}</p>
+      <ul className="list-disc pl-5 space-y-1">
         {foods.map((food, index) => (
-          <Badge
-            key={index}
-            variant="secondary"
-            className="bg-blue-100 text-blue-800"
-          >
+          <li key={index} className="text-base text-gray-800">
             {food}
-          </Badge>
+          </li>
         ))}
-      </div>
+      </ul>
     </CardContent>
   </Card>
 );
@@ -59,9 +68,11 @@ const SeasonalFoods = ({
 );
 
 const HormonesFoodGuide = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const negativeEmotionsHormones = [
     {
-      title: "1. Cortisol (Stress Hormone)",
+      title: "Cortisol (Stress Hormone)",
       foods: [
         "Dark chocolate",
         "Ashwagandha tea",
@@ -69,9 +80,11 @@ const HormonesFoodGuide = () => {
         "Mosambi (Sweet Lime)",
         "Santras (Oranges)",
       ],
+      description:
+        "These foods can help reduce cortisol levels and manage stress.",
     },
     {
-      title: "2. Adrenaline (Epinephrine)",
+      title: "Adrenaline (Epinephrine)",
       foods: [
         "Palak (Spinach)",
         "Methi (Fenugreek leaves)",
@@ -81,13 +94,17 @@ const HormonesFoodGuide = () => {
         "Badam (Almonds)",
         "Flaxseeds",
       ],
+      description:
+        "These foods can help lower adrenaline levels and promote relaxation.",
     },
     {
-      title: "3. Norepinephrine",
+      title: "Norepinephrine",
       foods: ["Flaxseeds", "Akhrot (Walnuts)", "Green tea", "Kela (Bananas)"],
+      description:
+        "These foods can help regulate norepinephrine levels and support emotional balance.",
     },
     {
-      title: "4. Serotonin (Low Levels)",
+      title: "Serotonin (Low Levels)",
       foods: [
         "Bhakri (made from Jowar or Bajra)",
         "Oats",
@@ -97,9 +114,11 @@ const HormonesFoodGuide = () => {
         "Akhrot (Walnuts)",
         "Flaxseeds",
       ],
+      description:
+        "These foods can help boost serotonin levels and improve mood.",
     },
     {
-      title: "5. Dopamine (Low Levels)",
+      title: "Dopamine (Low Levels)",
       foods: [
         "Dal (Lentils)",
         "Chole (Chickpeas)",
@@ -107,13 +126,17 @@ const HormonesFoodGuide = () => {
         "Dahi (Yogurt)",
         "Paneer",
       ],
+      description:
+        "These foods can help increase dopamine levels and enhance pleasure.",
     },
     {
-      title: "6. Estrogen",
+      title: "Estrogen",
       foods: ["Flaxseeds", "Tofu", "Soy milk", "Til (Sesame seeds)"],
+      description:
+        "These foods can help balance estrogen levels and support hormonal health.",
     },
     {
-      title: "7. Progesterone",
+      title: "Progesterone",
       foods: [
         "Kela (Bananas)",
         "Shakarkandi (Sweet Potatoes)",
@@ -122,9 +145,11 @@ const HormonesFoodGuide = () => {
         "Kaddu ke beej (Pumpkin seeds)",
         "Chole (Chickpeas)",
       ],
+      description:
+        "These foods can help increase progesterone levels and support reproductive health.",
     },
     {
-      title: "8. Testosterone",
+      title: "Testosterone",
       foods: [
         "Olive oil",
         "Avocados",
@@ -133,12 +158,14 @@ const HormonesFoodGuide = () => {
         "Ande (Eggs)",
         "Chole (Chickpeas)",
       ],
+      description:
+        "These foods can help boost testosterone levels and support overall health.",
     },
   ];
 
   const positiveEmotionsHormones = [
     {
-      title: "1. Serotonin (Boosting)",
+      title: "Serotonin (Boosting)",
       foods: [
         "Brown rice",
         "Whole wheat bread",
@@ -147,9 +174,11 @@ const HormonesFoodGuide = () => {
         "Badam (Almonds)",
         "Flaxseeds",
       ],
+      description:
+        "These foods can help boost serotonin levels, improving mood and well-being.",
     },
     {
-      title: "2. Dopamine (Boosting)",
+      title: "Dopamine (Boosting)",
       foods: [
         "Dal (Lentils)",
         "Chicken",
@@ -157,9 +186,11 @@ const HormonesFoodGuide = () => {
         "Doodh (Milk)",
         "Paneer",
       ],
+      description:
+        "These foods can help increase dopamine levels, enhancing pleasure and motivation.",
     },
     {
-      title: "3. Oxytocin",
+      title: "Oxytocin",
       foods: [
         "Dark chocolate",
         "Aam (Mangoes)",
@@ -167,18 +198,22 @@ const HormonesFoodGuide = () => {
         "Akhrot (Walnuts)",
         "Flaxseeds",
       ],
+      description:
+        "These foods can stimulate oxytocin release, promoting social bonding and emotional well-being.",
     },
     {
-      title: "4. Endorphins",
+      title: "Endorphins",
       foods: [
         "Green chilies",
         "Red chili powder",
         "Dark chocolate",
         "Pudina (Mint) tea",
       ],
+      description:
+        "These foods can help release endorphins, promoting feelings of happiness and relaxation.",
     },
     {
-      title: "5. Endocannabinoids",
+      title: "Endocannabinoids",
       foods: [
         "Flaxseeds",
         "Chia seeds",
@@ -186,9 +221,11 @@ const HormonesFoodGuide = () => {
         "Methi (Fenugreek leaves)",
         "Akhrot (Walnuts)",
       ],
+      description:
+        "These foods can help boost endocannabinoid levels, supporting overall well-being.",
     },
     {
-      title: "6. GABA (Gamma-Aminobutyric Acid)",
+      title: "GABA (Gamma-Aminobutyric Acid)",
       foods: [
         "Green tea",
         "Dahi (Yogurt)",
@@ -196,6 +233,8 @@ const HormonesFoodGuide = () => {
         "Palak (Spinach)",
         "Dark chocolate",
       ],
+      description:
+        "These foods can help increase GABA levels, promoting relaxation and reducing anxiety.",
     },
   ];
 
@@ -218,65 +257,124 @@ const HormonesFoodGuide = () => {
     },
   ];
 
+  const allHormones = [
+    ...negativeEmotionsHormones,
+    ...positiveEmotionsHormones,
+  ];
+
+  const filteredHormones = allHormones.filter(
+    (hormone) =>
+      hormone.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      hormone.foods.some((food) =>
+        food.toLowerCase().includes(searchTerm.toLowerCase())
+      ) ||
+      hormone.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-gray-100">
+    <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6 text-blue-800">
         Comprehensive Hormones and Emotions: An Indian Food Guide (Pune Region)
       </h1>
 
+      <div className="mb-6">
+        <div className="flex items-center space-x-2">
+          <Search className="text-gray-400" />
+          <Input
+            type="text"
+            placeholder="Search for hormones or foods..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full"
+          />
+        </div>
+      </div>
+
       <Card className="mb-6">
         <CardHeader>
-          <CardTitle className="text-xl font-semibold">Introduction</CardTitle>
+          <CardTitle className="text-xl font-semibold flex items-center">
+            <Info className="mr-2" /> Introduction
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <p>
-            This comprehensive guide is tailored for residents of Pune,
-            Maharashtra, focusing on easily accessible local foods that can help
-            balance hormones and influence emotions. The foods listed are
-            commonly found in local markets, grocery stores, and restaurants in
-            the Pune area.
+            This guide focuses on foods that can help balance hormones and
+            influence emotions positively. The foods listed are easily
+            accessible in Pune, Maharashtra, and can be found in local markets,
+            grocery stores, and restaurants. Remember, these foods are meant to
+            be consumed as part of a balanced diet to support hormone health,
+            not avoided.
           </p>
         </CardContent>
       </Card>
 
-      <Accordion type="single" collapsible className="mb-6">
-        <AccordionItem value="negative-emotions">
-          <AccordionTrigger className="text-xl font-semibold">
-            Hormones and Neurotransmitters Associated with Sadness and Negative
-            Emotions
-          </AccordionTrigger>
-          <AccordionContent>
+      {searchTerm ? (
+        <div className="mb-6">
+          <h2 className="text-xl font-semibold mb-4 flex items-center text-purple-700">
+            <Search className="mr-2 hidden sm:inline" /> Search Results
+          </h2>
+          {filteredHormones.map((hormone, index) => (
+            <HormoneCard
+              key={index}
+              number={index + 1}
+              title={hormone.title}
+              foods={hormone.foods}
+              description={hormone.description}
+            />
+          ))}
+        </div>
+      ) : (
+        <>
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold mb-4 flex items-center text-red-700">
+              <ArrowDownCircle className="mr-2 hidden sm:inline" /> Foods to
+              Help Reduce Hormones Associated with Stress and Negative Emotions
+            </h2>
+            <p className="mb-4 text-gray-600">
+              Consuming these foods can help lower levels of stress hormones and
+              neurotransmitters associated with negative emotions. They should
+              be incorporated into your diet, not avoided.
+            </p>
             {negativeEmotionsHormones.map((hormone, index) => (
               <HormoneCard
                 key={index}
+                number={index + 1}
                 title={hormone.title}
                 foods={hormone.foods}
+                description={hormone.description}
               />
             ))}
-          </AccordionContent>
-        </AccordionItem>
+          </div>
 
-        <AccordionItem value="positive-emotions">
-          <AccordionTrigger className="text-xl font-semibold">
-            Hormones and Neurotransmitters Associated with Happiness and
-            Well-Being
-          </AccordionTrigger>
-          <AccordionContent>
+          <div className="mb-6">
+            <h2 className="text-xl font-semibold mb-4 flex items-center text-green-700">
+              <ArrowUpCircle className="mr-2 hidden sm:inline" /> Foods to Help
+              Boost Hormones Associated with Happiness and Well-Being
+            </h2>
+            <p className="mb-4 text-gray-600">
+              These foods can help increase levels of hormones and
+              neurotransmitters associated with positive emotions and
+              well-being. Including them in your diet may contribute to improved
+              mood and emotional balance.
+            </p>
             {positiveEmotionsHormones.map((hormone, index) => (
               <HormoneCard
                 key={index}
+                number={index + 1}
                 title={hormone.title}
                 foods={hormone.foods}
+                description={hormone.description}
               />
             ))}
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
+          </div>
+        </>
+      )}
 
-      <Card className="mb-6 bg-orange-50">
+      <Card className="mb-6">
         <CardHeader>
-          <CardTitle className="text-xl font-semibold text-orange-800">
-            Pune-Specific Food Recommendations
+          <CardTitle className="text-xl font-semibold text-orange-800 flex items-center">
+            <Utensils className="mr-2 hidden sm:inline" /> Pune-Specific Food
+            Recommendations
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -302,8 +400,8 @@ const HormonesFoodGuide = () => {
             </li>
           </ul>
 
-          <h3 className="text-lg font-semibold mb-2 text-orange-700">
-            Seasonal Considerations
+          <h3 className="text-lg font-semibold mb-2 text-orange-700 mt-4 flex items-center">
+            <Sun className="mr-2" /> Seasonal Considerations
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {seasonalFoods.map((season, index) => (
@@ -343,10 +441,10 @@ const HormonesFoodGuide = () => {
         </CardContent>
       </Card>
 
-      <Card className="bg-blue-50">
+      <Card>
         <CardHeader>
-          <CardTitle className="text-xl font-semibold text-blue-800">
-            Final Note
+          <CardTitle className="text-xl font-semibold text-blue-800 flex items-center">
+            <Info className="mr-2 hidden sm:inline" /> Final Note
           </CardTitle>
         </CardHeader>
         <CardContent>
