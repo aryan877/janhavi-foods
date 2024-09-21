@@ -590,15 +590,17 @@ const HormonesFoodGuide = () => {
       </h1>
 
       <div className="mb-6">
-        <div className="flex items-center space-x-2">
-          <Search className="text-gray-400" />
+        <div className="relative">
           <Input
             type="text"
             placeholder="Search for hormones or foods..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full"
+            className="w-full pr-10"
           />
+          <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+            <Search className="h-5 w-5 text-gray-400" />
+          </div>
         </div>
       </div>
 
