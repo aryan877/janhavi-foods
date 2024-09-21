@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Accordion,
@@ -8,7 +10,7 @@ import {
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
-const HormoneCard = ({ title, foods }) => (
+const HormoneCard = ({ title, foods }: { title: string; foods: string[] }) => (
   <Card className="mb-4">
     <CardHeader>
       <CardTitle className="text-lg font-semibold text-blue-700">
@@ -31,7 +33,13 @@ const HormoneCard = ({ title, foods }) => (
   </Card>
 );
 
-const SeasonalFoods = ({ season, foods }) => (
+const SeasonalFoods = ({
+  season,
+  foods,
+}: {
+  season: string;
+  foods: string[];
+}) => (
   <Card className="mb-4 bg-green-50">
     <CardHeader>
       <CardTitle className="text-lg font-semibold text-green-700">
