@@ -21,18 +21,25 @@ import {
 const HormoneAccordion = ({
   number,
   title,
+  subtitle,
   foods,
   description,
 }: {
   number: number;
   title: string;
+  subtitle: string;
   foods: { name: string; benefit: string }[];
   description: string;
 }) => (
   <Accordion type="single" collapsible className="mb-4">
     <AccordionItem value={`item-${number}`}>
       <AccordionTrigger className="text-lg font-semibold text-blue-700">
-        {number}. {title}
+        <div className="text-left">
+          <div>
+            {number}. {title}
+          </div>
+          <p className="text-sm font-normal text-gray-600 mt-1">{subtitle}</p>
+        </div>
       </AccordionTrigger>
       <AccordionContent>
         <p className="mb-2 text-gray-600">{description}</p>
@@ -79,6 +86,7 @@ const HormonesFoodGuide = () => {
   const negativeEmotionsHormones = [
     {
       title: "Cortisol (Stress Hormone)",
+      subtitle: "Regulates stress response, metabolism, and immune function",
       foods: [
         {
           name: "Dark chocolate",
@@ -111,6 +119,8 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Adrenaline (Epinephrine)",
+      subtitle:
+        "Triggers 'fight or flight' response, increases heart rate and energy",
       foods: [
         {
           name: "Palak (Spinach)",
@@ -153,6 +163,7 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Norepinephrine",
+      subtitle: "Increases alertness, focus, and reaction time",
       foods: [
         {
           name: "Flaxseeds",
@@ -180,6 +191,7 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Serotonin (Low Levels)",
+      subtitle: "Regulates mood, sleep, appetite, and cognitive functions",
       foods: [
         {
           name: "Bhakri (made from Jowar or Bajra)",
@@ -222,6 +234,8 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Dopamine (Low Levels)",
+      subtitle:
+        "Controls pleasure and reward centers, motivation, and movement",
       foods: [
         {
           name: "Dal (Lentils)",
@@ -254,6 +268,8 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Estrogen",
+      subtitle:
+        "Regulates female reproductive system, bone health, and cognitive function",
       foods: [
         {
           name: "Flaxseeds",
@@ -281,6 +297,8 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Progesterone",
+      subtitle:
+        "Prepares the uterus for pregnancy and regulates menstrual cycle",
       foods: [
         {
           name: "Kela (Bananas)",
@@ -318,6 +336,7 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Testosterone",
+      subtitle: "Regulates male characteristics, muscle mass, and bone density",
       foods: [
         {
           name: "Olive oil",
@@ -358,6 +377,7 @@ const HormonesFoodGuide = () => {
   const positiveEmotionsHormones = [
     {
       title: "Serotonin (Boosting)",
+      subtitle: "Regulates mood, sleep, appetite, and cognitive functions",
       foods: [
         {
           name: "Brown rice",
@@ -395,6 +415,8 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Dopamine (Boosting)",
+      subtitle:
+        "Controls pleasure and reward centers, motivation, and movement",
       foods: [
         {
           name: "Dal (Lentils)",
@@ -427,6 +449,7 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Oxytocin",
+      subtitle: "Promotes bonding, trust, and social connection",
       foods: [
         {
           name: "Dark chocolate",
@@ -459,6 +482,7 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Endorphins",
+      subtitle: "Natural pain relievers and mood elevators",
       foods: [
         {
           name: "Green chilies",
@@ -471,7 +495,7 @@ const HormonesFoodGuide = () => {
         {
           name: "Dark chocolate",
           benefit:
-            "Can stimulate endorphin release and provide a sense of pleasure.",
+            "Can help release endorphins and provide a sense of pleasure.",
         },
         {
           name: "Pudina (Mint) tea",
@@ -484,6 +508,7 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "Endocannabinoids",
+      subtitle: "Regulate mood, appetite, pain sensation, and memory",
       foods: [
         {
           name: "Flaxseeds",
@@ -516,6 +541,7 @@ const HormonesFoodGuide = () => {
     },
     {
       title: "GABA (Gamma-Aminobutyric Acid)",
+      subtitle: "Reduces nervous system activity, promoting calmness",
       foods: [
         {
           name: "Green tea",
@@ -585,7 +611,7 @@ const HormonesFoodGuide = () => {
 
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-3xl font-bold text-center mb-6 text-blue-800">
+      <h1 className="text-3xl font-bold mb-6 text-blue-800">
         Comprehensive Hormones and Emotions: An Indian Food Guide (Pune Region)
       </h1>
 
@@ -632,6 +658,7 @@ const HormonesFoodGuide = () => {
               key={index}
               number={index + 1}
               title={hormone.title}
+              subtitle={hormone.subtitle}
               foods={hormone.foods}
               description={hormone.description}
             />
@@ -654,6 +681,7 @@ const HormonesFoodGuide = () => {
                 key={index}
                 number={index + 1}
                 title={hormone.title}
+                subtitle={hormone.subtitle}
                 foods={hormone.foods}
                 description={hormone.description}
               />
@@ -676,6 +704,7 @@ const HormonesFoodGuide = () => {
                 key={index}
                 number={index + 1}
                 title={hormone.title}
+                subtitle={hormone.subtitle}
                 foods={hormone.foods}
                 description={hormone.description}
               />
