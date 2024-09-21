@@ -11,8 +11,14 @@ import {
   Sun,
   Search,
 } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
-const HormoneCard = ({
+const HormoneAccordion = ({
   number,
   title,
   foods,
@@ -23,23 +29,23 @@ const HormoneCard = ({
   foods: { name: string; benefit: string }[];
   description: string;
 }) => (
-  <Card className="mb-4">
-    <CardHeader>
-      <CardTitle className="text-lg font-semibold text-blue-700">
+  <Accordion type="single" collapsible className="mb-4">
+    <AccordionItem value={`item-${number}`}>
+      <AccordionTrigger className="text-lg font-semibold text-blue-700">
         {number}. {title}
-      </CardTitle>
-    </CardHeader>
-    <CardContent>
-      <p className="mb-2 text-gray-600">{description}</p>
-      <ul className="list-disc pl-5 space-y-2">
-        {foods.map((food, index) => (
-          <li key={index} className="text-base text-gray-800">
-            <strong>{food.name}</strong>: {food.benefit}
-          </li>
-        ))}
-      </ul>
-    </CardContent>
-  </Card>
+      </AccordionTrigger>
+      <AccordionContent>
+        <p className="mb-2 text-gray-600">{description}</p>
+        <ul className="list-disc pl-5 space-y-2">
+          {foods.map((food, index) => (
+            <li key={index} className="text-base text-gray-800">
+              <strong>{food.name}</strong>: {food.benefit}
+            </li>
+          ))}
+        </ul>
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
 );
 
 const SeasonalFoods = ({
@@ -620,7 +626,7 @@ const HormonesFoodGuide = () => {
             <Search className="mr-2 hidden sm:inline" /> Search Results
           </h2>
           {filteredHormones.map((hormone, index) => (
-            <HormoneCard
+            <HormoneAccordion
               key={index}
               number={index + 1}
               title={hormone.title}
@@ -642,7 +648,7 @@ const HormonesFoodGuide = () => {
               be incorporated into your diet, not avoided.
             </p>
             {negativeEmotionsHormones.map((hormone, index) => (
-              <HormoneCard
+              <HormoneAccordion
                 key={index}
                 number={index + 1}
                 title={hormone.title}
@@ -664,7 +670,7 @@ const HormonesFoodGuide = () => {
               mood and emotional balance.
             </p>
             {positiveEmotionsHormones.map((hormone, index) => (
-              <HormoneCard
+              <HormoneAccordion
                 key={index}
                 number={index + 1}
                 title={hormone.title}
